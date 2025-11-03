@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahamd BND | æÈÓÇíÊ ÔÎÕí</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Ahamd BND</h1>
+    <p>ÇÒ ÈäÏÑÚÈÇÓ</p>
+  </header>
+
+  <section id="about">
+    <h2>ÏÑÈÇÑå ãä</h2>
+    <p>ÓáÇã! ãä Ahamd BND åÓÊã¡ ØÑÇÍ æ ÊæÓÚåÏåäÏå æÈ ÈÇ ÚáÇŞå Èå ØÑÇÍí ãÏÑä æ Ê˜äæáæíåÇí ÌÏíÏ.</p>
+  </section>
+
+  <section id="contact">
+    <h2>ÊãÇÓ ÈÇ ãä</h2>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="äÇã ÔãÇ" required>
+      <input type="email" name="email" placeholder="Çíãíá ÔãÇ" required>
+      <textarea name="message" placeholder="íÇã ÔãÇ..." required></textarea>
+      <button type="submit">ÇÑÓÇá</button>
+    </form>
+    <p id="responseMsg"></p>
+  </section>
+
+  <footer>
+    <h3>ÏäÈÇá ãä ÈÇÔíÏ</h3>
+    <div class="social-links">
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">Telegram</a>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const res = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message')
+        })
+      });
+      const result = await res.json();
+      document.getElementById('responseMsg').textContent = result.message;
+      form.reset();
+    });
+  </script>
+</body>
+</html>
