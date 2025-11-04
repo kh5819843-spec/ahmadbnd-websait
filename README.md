@@ -51,8 +51,8 @@
   <!-- 📦 EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    // 🧩 مقادیر تستی EmailJS
-    emailjs.init("ahmad-websayte"); // Public Key تستی
+    // 🧩  EmailJS
+    emailjs.init("kh5819843@gmail.com"); // Public Key 
 
     const form = document.getElementById("contactForm");
     const status = document.getElementById("status");
