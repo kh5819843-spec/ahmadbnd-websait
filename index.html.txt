@@ -3,33 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ahamd BND | ๆศำวํส ิฮีํ</title>
+  <title>Ahmad BND | ุณุงÛุช ุดุฎุตÛ</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- EmailJS ฺฉุชุงุจุฎุงูู -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
   <header>
-    <h1>Ahamd BND</h1>
-    <p>วา ศไฯัฺศวำ</p>
+    <h1>Ahmad BND</h1>
+    <p>ุจุฑูุงู…ูโ€ููÛุณ ู ุทุฑุงุญ ูุจ</p>
   </header>
 
   <section id="about">
-    <h2>ฯัศวัๅ ใไ</h2>
-    <p>ำแวใ! ใไ Ahamd BND ๅำสใก ุัวอ ๆ สๆำฺๅฯๅไฯๅ ๆศ ศว ฺแวÞๅ ศๅ ุัวอํ ใฯัไ ๆ สไๆแๆํๅวํ ฬฯํฯ.</p>
+    <h2>ุฏุฑุจุงุฑู ู…ู</h2>
+    <p>
+      ุณูุงู…! ู…ู Ahmad BND ูุณุชู… โ€” ุทุฑุงุญ ู ุชูุณุนูโ€ุฏููุฏู ูุจ ุจุง ุชู…ุฑฺฉุฒ ุจุฑ ุทุฑุงุญÛ ู…ุฏุฑู ู ุชฺฉููููฺÛโ€ูุงÛ ุฌุฏÛุฏ.
+    </p>
   </section>
 
   <section id="contact">
-    <h2>สใวำ ศว ใไ</h2>
+    <h2>ุชู…ุงุณ ุจุง ู…ู</h2>
     <form id="contactForm">
-      <input type="text" name="name" placeholder="ไวใ ิใว" required>
-      <input type="email" name="email" placeholder="วํใํแ ิใว" required>
-      <textarea name="message" placeholder="ํวใ ิใว..." required></textarea>
-      <button type="submit">วัำวแ</button>
+      <input type="text" name="name" placeholder="ูุงู… ุดู…ุง" required>
+      <input type="email" name="email" placeholder="ุงÛู…Ûู ุดู…ุง" required>
+      <textarea name="message" placeholder="ูพÛุงู… ุดู…ุง..." required></textarea>
+      <button type="submit">ุงุฑุณุงู</button>
     </form>
     <p id="responseMsg"></p>
   </section>
 
   <footer>
-    <h3>ฯไศวแ ใไ ศวิํฯ</h3>
+    <h3>ุฏูุจุงู ู…ู ุจุงุดÛุฏ</h3>
     <div class="social-links">
       <a href="#" target="_blank">Instagram</a>
       <a href="#" target="_blank">Telegram</a>
@@ -38,21 +43,31 @@
   </footer>
 
   <script>
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const res = await fetch('/.netlify/functions/contact', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: data.get('name'),
-          email: data.get('email'),
-          message: data.get('message')
-        })
+    // ู…ูุฏุงุฑุฏูÛ ุงููÛู EmailJS
+    (function() {
+      emailjs.init({
+        publicKey: "HZWtwr83vTE7CCcv6", // ๐”‘ ฺฉูÛุฏ ุนู…ูู…Û ุดู…ุง
       });
-      const result = await res.json();
-      document.getElementById('responseMsg').textContent = result.message;
-      form.reset();
+    })();
+
+    const form = document.getElementById("contactForm");
+    const msg = document.getElementById("responseMsg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      emailjs.send("43qNH8mXDjEkEe9Ospp9T", "YOUR_TEMPLATE_ID", {
+        from_name: form.name.value,
+        from_email: form.email.value,
+        message: form.message.value,
+      })
+      .then(() => {
+        msg.textContent = "โ… ูพÛุงู… ุดู…ุง ุจุง ู…ูููÛุช ุงุฑุณุงู ุดุฏ!";
+        form.reset();
+      }, (error) => {
+        console.error(error);
+        msg.textContent = "โ ุฎุทุง ุฏุฑ ุงุฑุณุงู ูพÛุงู…. ูุทูุงู ุฏูุจุงุฑู ุชูุงุด ฺฉูÛุฏ.";
+      });
     });
   </script>
 </body>
