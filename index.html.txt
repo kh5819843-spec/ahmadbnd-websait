@@ -8,7 +8,8 @@
 
   <!-- EmailJS کتابخانه -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-</head>
+</head><link rel="stylesheet" href="style.css">
+
 <body>
   <header>
     <h1>Ahmad BND</h1>
@@ -37,7 +38,7 @@
     <h3>دنبال من باشید</h3>
     <div class="social-links">
       <a href="#" target="_blank">Instagram</a>
-      <a href="#" target="_blank">Telegram</a>
+      <a href="#" target="_blank">Telegram</a>@AHMADbnd67
       <a href="#" target="_blank">GitHub</a>
     </div>
   </footer>
